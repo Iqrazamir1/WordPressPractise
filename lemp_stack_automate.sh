@@ -18,5 +18,5 @@ sudo systemctl start mariadb && sudo systemctl enable mariadb
 sudo systemctl status mariabd >> /root/testing.txt
 
 # Install PHP 
-sudo apt -y install php php-cli php-common php-imap php-fpm php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
+sudo apt -y install php-fpm php php-cli php-common php-imap php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
