@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo rm -rf /var/www/html
 sudo apt -y install unzip
 sudo wget -O /var/www/latest.zip https://wordpress.org/latest.zip
 sudo unzip /var/www/latest.zip
