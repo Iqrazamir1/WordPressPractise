@@ -14,6 +14,6 @@ sudo mysql -e "CREATE USER IF NOT EXISTS wpuser@localhost identified by 'my_pass
 sudo mysql -e "GRANT ALL PRIVILEGES ON wordpress.* to wpuser@localhost"
 sudo mysql -e "FLUSH PRIVILEGES"
 
-sudo wget -O /var/www/html/wp-config.php https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
-sudo chmod 640 /var/www/html/wp-config.php
-sudo chown -R www.data:www-data /var/www/html 
+sudo wget -O https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
+sudo chmod 640 wp-config.php
+sudo chown -R www.data:www-data
