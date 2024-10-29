@@ -21,5 +21,6 @@ cd wordpress/
 cp wp-config-sample.php wp-config.php 
 
 # S3 Bucket with the wp-config.pho file 
+sudo wget -O /var/www/html/wp-config.php https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
 
 sudo chmod 640 wp-config.php 
