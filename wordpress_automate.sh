@@ -1,21 +1,19 @@
 #!/bin/bash
 
-cd /var/www/html
+sudo rm -rf /var/www/html
+sudo apt -y install unzip
+sudo wget -O /var/www/latest.zip https://wordpress.org/latest.zip
+sudo unzip /var/www/latest.zip
+sudo rm /var/www/latest.zip
+sudo mv /var/www/wordpress /var/www/html 
 
-# Install the unzip package 
-sudo apt -y install unzip 
-
-# Install/Unzip/Remove WordPress 
-sudo wget https://wordpress.org/latest.zip
-sudo unzip latest.zip
-sudo rm latest.zip
-
-# Create a MariaDB Database and a User for the WordPress Site  
+# MariaDB Database
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"
-sudo mysql -e "CREATE USER wpuser@localhost identified by 'my_password'"
+sudo mysql -e "CREATE USER IF NOT EXISTS wpuser@localhost identified by 'my_password'"
 sudo mysql -e "GRANT ALL PRIVILEGES ON wordpress.* to wpuser@localhost"
 sudo mysql -e "FLUSH PRIVILEGES"
 
-# Configure WordPress
-cd wordpress/
-cp wp-config-sample.php wp-config.php 
+sudo wget -O /var/www/html/wp-config.php https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
+
+sudo chmod 640 /var/www/html/wp-config.php
+sudo chown -R www.data:www-data /var/www/html 
