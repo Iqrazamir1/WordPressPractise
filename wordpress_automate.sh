@@ -18,8 +18,10 @@ sudo mysql -e "GRANT ALL PRIVILEGES ON wordpress.* to wpuser@localhost"
 sudo mysql -e "FLUSH PRIVILEGES" # Applies everything you've done 
 
 # Configure WordPress
-cd wordpress/
-cp wp-config-sample.php wp-config.php 
+#cd wordpress/
+#cp wp-config-sample.php wp-config.php 
+
+sudo wget -O /var/www/html/wp-config.php https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
 
 sudo chmod 640 wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wordpress
