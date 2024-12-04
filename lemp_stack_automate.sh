@@ -24,7 +24,7 @@ sudo php -v >> /root/testing.txt
 sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
-sed -i "s/SERVERNAME/$dns_recored/g" /etc/nginx/conf.d/nginx.conf
+sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 
 # This will only reload nginx if the test is successful 
 nginx -t && systemctl reload nginx
