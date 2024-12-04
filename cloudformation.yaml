@@ -3,7 +3,7 @@ Description: >-
   CloudFormation template to create EC2 instance with security group
 
 Resources:
-  MyInstance:
+  EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       AvailabilityZone: us-east-1a
