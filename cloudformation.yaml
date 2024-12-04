@@ -1,19 +1,20 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to create EC2 instance with security group
+Description: >-
+  CloudFormation template to create EC2 instance with security group
 
 Resources:
-  EC2Instance:
+  MyInstance:
     Type: AWS::EC2::Instance
     Properties:
       AvailabilityZone: us-east-1a
+      ImageId: ami-08eb150f611ca277f
       InstanceType: t3.micro
-      KeyName: Wordpress
       SecurityGroups:
         - sg-00917ed2150208fe7
-      ImageId: ami-08eb150f611ca277f
-      
+      KeyName: CF-Keys
       UserData:
         Fn::Base64: !Sub |
+          #!/bin/bash
           #!/bin/bash
           sudo apt -y update 
           sudo apt -y upgrade 
@@ -22,36 +23,24 @@ Resources:
           sudo chmod -R 755 /root/WordPressPractise
           sudo bash /root/WordPressPractise/lemp_stack_automate.sh
 
-  # Elastic IP resource, provides a static public IP address to the instance
-  MyElasticIP:
-    Type: AWS::EC2::EIP
-
-  # Associates the Elastic IP with the EC2 instance
-  MyEIPAssociation:
-    Type: AWS::EC2::EIPAssociation
-    Properties:
-      # Associate the EIP with the EC2 instance
-      InstanceId: !Ref MyInstance
-      # Reference the Elastic IP to associate with the instance
-      EIP: !Ref MyElasticIP
-
-  # Defines the security group that controls network access to the EC2 instance
-  InstanceSecurityGroup:
+  # our EC2 security group
+  SSHSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      # Description of the security group
-      GroupDescription: Enable access via ports 22, 80, and 443
-      # Ingress rules to allow inbound traffic
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+
+  # our second EC2 security group
+  ServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable accessing server via port 80
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 22  # Allows SSH access on port 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0  # Open to all IP addresses (not recommended for production)
-        - IpProtocol: tcp
-          FromPort: 80  # Allows HTTP traffic on port 80
+          FromPort: 80
           ToPort: 80
-          CidrIp: 0.0.0.0/0  # Open to all IP addresses
-        - IpProtocol: tcp
-          FromPort: 443  # Allows HTTPS traffic on port 443
-          ToPort: 443
-          CidrIp: 0.0.0.0/0  # Open to all IP addresses
+          CidrIp: 0.0.0.0/0
