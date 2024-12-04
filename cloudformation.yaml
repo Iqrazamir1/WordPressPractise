@@ -1,9 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: >-
-  # CloudFormation template to create EC2 instance with security group
+Description: CloudFormation template to create EC2 instance with security group
 
 Resources:
-  # Defines the EC2 instance resource
   MyInstance:
     Type: AWS::EC2::Instance
     Properties:
@@ -11,9 +9,7 @@ Resources:
       ImageId: ami-08eb150f611ca277f
       InstanceType: t3.micro
       SecurityGroups:
-        - !Ref SSHSecurityGroup  # Reference to a predefined security group (to be defined elsewhere)
-        - !Ref ServerSecurityGroup  # Reference to a second security group
-      # SSH key pair used to connect to the instance securely
+        - sg-00917ed2150208fe7
       KeyName: Wordpress
       # UserData script that runs automatically when the instance starts, Base64 encoded
       UserData:
