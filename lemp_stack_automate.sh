@@ -26,6 +26,9 @@ sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
 dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 
+# Disabling the defaut confug file 
+sudo rm /etc/nginx/sites-enabled/default 
+
 # This will only reload nginx if the test is successful 
 nginx -t && systemctl reload nginx
 
