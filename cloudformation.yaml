@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to deploy an EC2 instance with a specific key pair and security group, running Ubuntu.
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro  # Change as needed
+      KeyName: Wordpress # Replace with your key pair name
+      SecurityGroupIds:
+        - sg-00917ed2150208fe7  # Replace with your security group ID
+      ImageId: ami-08eb150f611ca277f  # Replace with the AMI ID for Ubuntu in your region
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt -y update 
+          sudo apt -y upgrade 
+          cd /root/
+          sudo git clone                 https://github.com/Iqrazamir1/WordPressPractise.git
+          sudo chmod -R 755 /root/WordPressPractise
+          sudo bash /root/WordPressPractise/lemp_stack_automate.sh
+      Tags:
+        - Key: Name
+          Value: UbuntuInstance
+
+Outputs:
+  InstanceId:
+    Description: ID of the newly created EC2 instance
+    Value: !Ref EC2Instance
+  PublicIP:
+    Description: Public IP of the EC2 instance
+    Value: !GetAtt EC2Instance.PublicIp
