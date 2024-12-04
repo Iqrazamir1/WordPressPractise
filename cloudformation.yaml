@@ -5,6 +5,7 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
+      AvailabilityZone: us-east-1a
       InstanceType: t2.micro  # Change as needed
       KeyName: Wordpress # Replace with your key pair name
       SecurityGroupIds:
