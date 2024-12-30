@@ -12,11 +12,11 @@ sudo unzip latest.zip
 sudo rm latest.zip
 
 # Generate password for use in WP DB
-password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
-username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
+#password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
+#username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
 
-echo $password > creds.txt
-echo $username >> creds.txt
+#echo $password > creds.txt
+#echo $username >> creds.txt
 
 # Create a MariaDB Database and a User for the WordPress Site  
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
