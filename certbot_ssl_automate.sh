@@ -7,7 +7,7 @@ sudo apt install -y certbot python3-certbot-nginx
 
 # Define your email
 EMAIL="zamiriqra0@outlook.com"
-DOMAIN="ec2-13-48-249-214.eu-north-1.compute.amazonaws.com"
+DOMAIN="paints-4-you.com"
 
 # Use Certbot to obtain and install the SSL certificate
 sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
