@@ -28,7 +28,7 @@ check_exit_status "apt upgrade"
 
 # Clone the GitHub repository
 echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-sudo git clone -b test https://github.com/Iqrazamir1/WordPressPractise.git
+sudo git clone -b test https://github.com/Iqrazamir1/WordPressPractise.git /root/WordPressPractise
 check_exit_status "git clone"
 
 # Change permissions of the cloned repository
@@ -39,6 +39,7 @@ check_exit_status "chmod"
 # Run the setup script
 echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
 sudo bash /root/WordPressPractise/lemp_stack_automate.sh
+check_exit_status "lemp-setup.sh"
 
 ############################################
 
