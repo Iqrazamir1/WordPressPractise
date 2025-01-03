@@ -38,6 +38,7 @@ check_exit_status "chmod"
 
 # Run the setup script
 echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
+sudo bash /root/WordPressPractise/lemp_stack_automate.sh
 
 ############################################
 
@@ -48,4 +49,4 @@ echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
 #cd /root/
 #sudo git clone -b test https://github.com/Iqrazamir1/WordPressPractise.git
 #sudo chmod -R 755 /root/WordPressPractise
-sudo bash /root/WordPressPractise/lemp_stack_automate.sh
+#sudo bash /root/WordPressPractise/lemp_stack_automate.sh
