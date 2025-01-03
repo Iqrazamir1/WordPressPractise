@@ -2,7 +2,7 @@
 
 # Update package list and insta;; Certbot and Cerbot nginx plugin
 #sudo apt update -y
-#sudo apy upgrade -y 
+#sudo apt upgrade -y 
 #sudo apt install certbot python3-certbot-nginx -y
 
 # Defining my email
