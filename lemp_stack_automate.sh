@@ -32,4 +32,5 @@ sudo rm /etc/nginx/sites-enabled/default
 # This will only reload nginx if the test is successful 
 nginx -t && systemctl reload nginx
 
-sudo bash /root/WordPressPractise/wordpress_automate.sh  
+sudo bash /root/WordPressPractise/ssl_certbot_automate.sh 
+#sudo bash /root/WordPressPractise/wordpress_automate.sh  
