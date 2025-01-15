@@ -67,7 +67,7 @@ sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
 sudo mysql $username < /tmp/wordpress_dump.sql
 
 # Clean up the dump file
-sudo rm /tmp/wordpress_dump.sql
+#sudo rm /tmp/wordpress_dump.sql
 
 # Set up the WordPress config file
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
