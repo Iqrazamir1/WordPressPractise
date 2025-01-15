@@ -55,10 +55,10 @@ echo $username >> creds.txt
 echo $password > creds.txt
 
 # Download the database dump from S3
-aws s3 cp s3://wordpress_dump.sql.gz/ /tmp/wordpress_dump.sql.gz
+aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
 
 # Unzip the dump file
-sudo gunzip /tmp/wordpress_dump.sql.gz 
+sudo gunzip /tmp/wordpress_dump.sql.gz
 
 # Create the database (if it doesn't already exist)
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
