@@ -39,4 +39,4 @@ check_exit_status "chmod"
 # Run the setup script
 echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
 sudo bash /root/WordPressPractise/lemp_stack_automate.sh
-check_exit_status "lemp-setup.sh"
+check_exit_status "lemp-setup.sh"p-setup.sh"
