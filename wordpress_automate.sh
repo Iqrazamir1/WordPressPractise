@@ -40,6 +40,7 @@
 cd /var/www/html
 
 # Installing required packages
+sudo apt -y install unzip
 sudo apt -y install unzip awscli
 
 # Install/Unzip/Remove WordPress
