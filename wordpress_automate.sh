@@ -41,7 +41,6 @@ cd /var/www/html
 
 # Installing required packages
 sudo apt -y install unzip
-sudo apt -y install unzip awscli
 
 # Install/Unzip/Remove WordPress
 sudo wget https://wordpress.org/latest.zip 
@@ -55,20 +54,22 @@ password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
 echo $username >> creds.txt
 echo $password > creds.txt
 
-# Download the database dump from S3
+# Install AWS CLI tools
+sudo apt -y update
+sudo apt -y install unzip curl
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+# Connect to S3 Bucket
+aws configure
+###################### Enter credentails
 aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
-
-# Unzip the dump file
 sudo gunzip /tmp/wordpress_dump.sql.gz
-
-# Create the database (if it doesn't already exist)
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
-
-# Restore the database from the dump file
 sudo mysql $username < /tmp/wordpress_dump.sql
-
-# Clean up the dump file
-#sudo rm /tmp/wordpress_dump.sql
+sudo rm /tmp/wordpress_dump.sql
 
 # Set up the WordPress config file
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
