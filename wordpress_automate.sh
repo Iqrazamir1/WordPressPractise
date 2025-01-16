@@ -55,16 +55,9 @@ echo $username >> creds.txt
 echo $password > creds.txt
 
 # Install AWS CLI tools
-sudo apt -y update
-sudo apt -y install unzip curl
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-aws --version
+snap install aws-cli --classic
 
 # Connect to S3 Bucket
-aws configure
-###################### Enter credentails
 aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
 sudo gunzip /tmp/wordpress_dump.sql.gz
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
