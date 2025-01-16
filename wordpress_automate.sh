@@ -39,6 +39,9 @@
 # Entering the html directory 
 cd /var/www/html
 
+# Install AWS CLI tools
+snap install aws-cli --classic
+
 # Installing required packages
 sudo apt -y install unzip
 
@@ -53,9 +56,6 @@ password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
 
 echo $username >> creds.txt
 echo $password > creds.txt
-
-# Install AWS CLI tools
-snap install aws-cli --classic
 
 # Connect to S3 Bucket
 aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
