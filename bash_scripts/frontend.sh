@@ -48,39 +48,29 @@ sudo systemctl status nginx > /root/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
 
-###########sudo systemctl stop apache2 # stops apache because we're aleady using nginx
-###########sudo systemctl disable apache2 # disables apache from starting on a server reboot
-###########sudo mv /var/www/html/index.html /var/www/html/index.html.old # rename apache testing page
-###########sudo mv /home/ubuntu/wordpress-project/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
-
 sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-###########dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
-dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
+my_domain=REPLACE_DOMAIN
+elastic_ip=REPLACE_MY_ELASTIC_IP
 
-##########################################
+CF_API=REPLACE_CF_API
+CF_ZONE_ID=REPLACE_CF_ZONE_ID
 
-#my_domain=REPLACE_DOMAIN
-#elastic_ip=REPLACE_MY_ELASTIC_IP
-
-# CF_API=REPLACE_CF_API
-# CF_ZONE_ID=REPLACE_CF_ZONE_ID
-
-# # Create A record
-# log "Creating A record..."
-# curl --request POST \
-#   --url https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records \
-#   --header 'Content-Type: application/json' \
-#   --header "Authorization: Bearer $CF_API" \
-#   --data '{
-#   "content": "'"$elastic_ip"'",
-#   "name": "'"$my_domain"'",
-#   "proxied": true,
-#   "type": "A",
-#   "comment": "Automatically adding A record",
-#   "tags": [],
-#   "ttl": 3600
-# }'
+# Create A record
+log "Creating A record..."
+curl --request POST \
+  --url https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer $CF_API" \
+  --data '{
+  "content": "'"$elastic_ip"'",
+  "name": "'"$my_domain"'",
+  "proxied": true,
+  "type": "A",
+  "comment": "Automatically adding A record",
+  "tags": [],
+  "ttl": 3600
+}'
 
 # Update nginx configuration file
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
@@ -93,8 +83,12 @@ sudo apt install -y certbot
 sudo apt install -y python3-certbot-nginx
 
 # Define your email
-EMAIL="zamiriqra0@outlook.com"
-DOMAIN="certbot.paints-4-you.com"
+EMAIL=REPLACE_EMAIL
+DOMAIN=REPLACE_DOMAIN
+
+# Define your email
+#EMAIL="zamiriqra0@outlook.com"
+#DOMAIN="certbot.paints-4-you.com"
 
 sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
 
@@ -111,7 +105,6 @@ sudo rm latest.zip
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wordpress
-
 
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 STRING='put your unique phrase here'
