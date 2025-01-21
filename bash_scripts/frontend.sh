@@ -48,7 +48,7 @@ sudo systemctl status nginx > /root/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
 
-sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /root/WordPressPractise/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 my_domain=REPLACE_DOMAIN
 elastic_ip=REPLACE_MY_ELASTIC_IP
