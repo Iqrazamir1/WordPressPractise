@@ -17,12 +17,6 @@ username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
 echo $password > creds.txt
 echo $username >> creds.txt
 
-# # Create a new database for WordPress
-# sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
-# sudo mysql -e "CREATE USER $username@localhost identified by '$password'"
-# sudo mysql -e "GRANT ALL PRIVILEGES ON $username.* to $username@localhost"
-# sudo mysql -e "FLUSH PRIVILEGES" 
-
 # Connect to S3 Bucket
 aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
 sudo gunzip /tmp/wordpress_dump.sql.gz
