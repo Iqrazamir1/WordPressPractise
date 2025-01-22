@@ -50,27 +50,27 @@ sudo php -v >> /root/testing.txt
 
 sudo mv /root/WordPressPractise/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-#my_domain=REPLACE_DOMAIN
-#elastic_ip=REPLACE_MY_ELASTIC_IP
+my_domain=REPLACE_DOMAIN
+elastic_ip=REPLACE_MY_ELASTIC_IP
 
-#CF_API=REPLACE_CF_API
-#CF_ZONE_ID=REPLACE_CF_ZONE_ID
+CF_API=REPLACE_CF_API
+CF_ZONE_ID=REPLACE_CF_ZONE_ID
 
-# Create A record
-#log "Creating A record..."
-#curl --request POST \
-#  --url https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records \
-#  --header 'Content-Type: application/json' \
-#  --header "Authorization: Bearer $CF_API" \
-#  --data '{
-#  "content": "'"$elastic_ip"'",
-# "name": "'"$my_domain"'",
-#  "proxied": true,
-#  "type": "A",
-#  "comment": "Automatically adding A record",
-#  "tags": [],
-#  "ttl": 3600
-#}'
+Create A record
+log "Creating A record..."
+curl --request POST \
+ --url https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records \
+ --header 'Content-Type: application/json' \
+ --header "Authorization: Bearer $CF_API" \
+ --data '{
+ "content": "'"$elastic_ip"'",
+"name": "'"$my_domain"'",
+ "proxied": true,
+ "type": "A",
+ "comment": "Automatically adding A record",
+ "tags": [],
+ "ttl": 3600
+}'
 
 # Update nginx configuration file
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
@@ -83,12 +83,12 @@ sudo apt install -y certbot
 sudo apt install -y python3-certbot-nginx
 
 # Define your email
-#EMAIL=REPLACE_EMAIL
-#DOMAIN=REPLACE_DOMAIN
+EMAIL=REPLACE_EMAIL
+DOMAIN=REPLACE_DOMAIN
 
 # Define your email
-EMAIL="zamiriqra0@outlook.com"
-DOMAIN="certbot.paints-4-you.com"
+# EMAIL="zamiriqra0@outlook.com"
+# DOMAIN="certbot.paints-4-you.com"
 
 sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
 
@@ -106,6 +106,6 @@ sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wordpress
 
-#SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
-#STRING='put your unique phrase here'
-#printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
+SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
+STRING='put your unique phrase here'
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
