@@ -82,13 +82,13 @@ sudo apt upgrade -y
 sudo apt install -y certbot
 sudo apt install -y python3-certbot-nginx
 
-# Define your email
-EMAIL=REPLACE_EMAIL
-DOMAIN=REPLACE_DOMAIN
+# # Define your email
+# EMAIL=REPLACE_EMAIL
+# DOMAIN=REPLACE_DOMAIN
 
 # Define your email
-# EMAIL="zamiriqra0@outlook.com"
-# DOMAIN="certbot.paints-4-you.com"
+EMAIL="zamiriqra0@outlook.com"
+DOMAIN="certbot.paints-4-you.com"
 
 sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
 
